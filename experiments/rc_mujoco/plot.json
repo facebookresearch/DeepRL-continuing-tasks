@@ -1,0 +1,2411 @@
+{
+	"plots_dir": ["experiments/rc_mujoco/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetah_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"curve_labels": [[ "TD", "RVI", "MA", "No RC"]],
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetah_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetah_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetah_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_ant_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_ant_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_ant_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_ant_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"curve_labels": [[ "TD", "RVI", "MA", "No RC"]],
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reacher_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reacher_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reacher_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reacher_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pusher_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pusher_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pusher_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pusher_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_specialant_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_specialant_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_specialant_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco/"],
+					"env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_specialant_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "HalfCheetah-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahar_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"curve_labels": [[ "TD", "RVI", "MA", "No RC"]],
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "HalfCheetah-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahar_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "HalfCheetah-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahar_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "HalfCheetah-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahar_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Ant-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_antar_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Ant-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_antar_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Ant-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+
+			"type": ["learning_curve"],
+			"name": ["learning_curves_antar_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Ant-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_antar_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopperar_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopperar_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopperar_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopperar_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidar_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidar_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidar_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidar_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2dar_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2dar_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2dar_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+
+			"title": ["DDPG"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/rc_mujoco_agent_reset/inputs.json"],
+					"exp_output_dir": ["experiments/rc_mujoco_agent_reset/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				},
+				{
+					"reward_centering:type":["MA"]
+				},
+				{
+					"reward_centering:type":[null]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2dar_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+
+			"title": ["PPO"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

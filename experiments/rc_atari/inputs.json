@@ -1,0 +1,152 @@
+{
+    "print_every_x_steps": [10000],
+    "record_period": [100000],
+    "max_steps": [5000000],
+    "eval_max_steps": [10000],
+    "eval_in_episodic_env": [false],
+    "eval_in_continuing_env": [false],
+    "save_model": [true],
+    "model_folder": ["models/"],
+    "video_folder": ["videos/"],
+    "reward_centering": [
+        {
+            "reward_centering:type":[null],
+            "discount_factor": [0.99, 0.999]
+        },
+        {
+            "reward_centering:type":["TD"],
+            "reward_centering:initialize_reward_rate": [true],
+            "reward_rate_optimizer:type": ["SGD"],
+            "reward_rate_optimizer:lr": [3e-2, 1e-2, 3e-3, 1e-3, 3e-4],
+            "discount_factor": [0.99, 0.999, 1.0]
+        },
+        {
+            "reward_centering:type":["MA"],
+            "reward_centering:ma_rate": [0.99, 0.999, 0.9999],
+            "discount_factor": [0.99, 0.999, 1.0]
+        },
+        {
+            "reward_centering:type":["RVI"],
+            "discount_factor": [0.99, 0.999, 1.0]
+        }
+    ],
+    "algos": [
+        {
+            "policy_learner:type": ["DeepQLearning"],
+            "network_instance:type": ["CNNQValueMultiHeadNetwork"],
+            "network_instance:kernel_sizes": [[8, 4, 3]],
+            "network_instance:output_channels_list": [[32, 64, 64]],
+            "network_instance:strides": [[4, 2, 1]],
+            "network_instance:paddings": [[0, 0, 0]],
+            "network_instance:hidden_dims_fully_connected": [[512]],
+            "optimizer:type": ["Adam"],
+            "optimizer:lr": [1e-4],
+            "training_rounds": [1],
+            "batch_size": [32],
+            "soft_update_tau": [1.0],
+            "target_update_freq": [250],
+            "action_representation_module:type": ["OneHotActionTensorRepresentationModule"],
+            "exploration_module:type": ["EGreedyExploration"],
+            "exploration_module:epsilon": [0.01],
+            "exploration_module:warmup_steps": [1000000],
+            "exploration_module:start_epsilon": [1.0],
+            "exploration_module:end_epsilon": [0.01],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [800000],
+            "learn_every_k_steps": [4],
+            "learning_starts": [80000]
+        },
+        {
+            "policy_learner:type": ["SoftActorCritic"],
+            "training_rounds": [1],
+            "batch_size": [64],
+            "critic_soft_update_tau": [1.0],
+            "critic_target_update_freq": [2000],
+            "entropy_autotune": [false],
+            "entropy_coef": [0.2],
+            "target_entropy_scale": [0.89],
+            "actor_network_instance:type": ["CNNActorNetwork"],
+            "actor_network_instance:kernel_sizes": [[8, 4, 3]],
+            "actor_network_instance:output_channels_list": [[32, 64, 64]],
+            "actor_network_instance:strides": [[4, 2, 1]],
+            "actor_network_instance:paddings": [[0, 0, 0]],
+            "actor_network_instance:hidden_dims_fully_connected": [[512]],
+            "critic_network_instance:type": ["EnsembleQValueNetwork"],
+            "critic_network_instance:ensemble_size": [2],
+            "critic_member_network:type": ["CNNQValueMultiHeadNetwork"],
+            "critic_member_network:kernel_sizes": [[8, 4, 3]],
+            "critic_member_network:output_channels_list": [[32, 64, 64]],
+            "critic_member_network:strides": [[4, 2, 1]],
+            "critic_member_network:paddings": [[0, 0, 0]],
+            "critic_member_network:hidden_dims_fully_connected": [[512]],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "actor_optimizer:eps": [1e-4],
+            "critic_optimizer:eps": [1e-4],
+            "action_representation_module:type": ["OneHotActionTensorRepresentationModule"],
+            "exploration_module:type": ["PropensityExploration"],
+            "exploration_module_wrapper:type": ["Warmup"],
+            "exploration_module_wrapper:warmup_steps": [20000],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [800000],
+            "learn_every_k_steps": [4],
+            "learning_starts": [20000]
+        },
+        {
+            "policy_learner:type": ["ProximalPolicyOptimization"],
+            "actor_network_instance:type": ["CNNActorNetwork"],
+            "critic_network_instance:type": ["CNNValueNetwork"],
+            "actor_network_instance:kernel_sizes": [[8, 4, 3]],
+            "actor_network_instance:output_channels_list": [[32, 64, 64]],
+            "actor_network_instance:strides": [[4, 2, 1]],
+            "actor_network_instance:paddings": [[0, 0, 0]],
+            "actor_network_instance:hidden_dims_fully_connected": [[512]],
+            "critic_network_instance:kernel_sizes": [[8, 4, 3]],
+            "critic_network_instance:output_channels_list": [[32, 64, 64]],
+            "critic_network_instance:strides": [[4, 2, 1]],
+            "critic_network_instance:paddings": [[0, 0, 0]],
+            "critic_network_instance:hidden_dims_fully_connected": [[512]],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "training_rounds": [32],
+            "batch_size": [256],
+            "action_representation_module:type": ["OneHotActionTensorRepresentationModule"],
+            "exploration_module:type": ["PropensityExploration"],
+            "replay_buffer:type": ["OnPolicyReplayBuffer"],
+            "replay_buffer:capacity": [1030],
+            "learn_every_k_steps": [1024],
+            "learning_starts": [1],
+            "is_action_continuous": [false],
+            "epsilon": [0.1],
+            "norm_return": [false],
+            "norm_adv": [true],
+            "clip_value": [false],
+            "max_grad_norm": [0.5],
+            "entropy_bonus_scaling": [0.01]
+        }
+    ],
+    "envs_name": [
+        {
+            "env": [[{"env_name": "BreakoutNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        },
+        {
+            "env": [[{"env_name": "PongNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        },
+        {
+            "env": [[{"env_name": "SpaceInvadersNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        },
+        {
+            "env": [[{"env_name": "BeamRiderNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        },
+        {
+            "env": [[{"env_name": "SeaquestNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        },
+        {
+            "env": [[{"env_name": "MsPacmanNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]]
+        }
+    ]
+}

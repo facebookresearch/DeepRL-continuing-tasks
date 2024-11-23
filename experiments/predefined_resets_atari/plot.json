@@ -1,0 +1,145 @@
+{
+	"plots_dir": ["experiments/predefined_resets_atari/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "BreakoutNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_breakout"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"curve_labels": [["DQN", "SAC", "PPO"]],
+			"title": ["BreakoutNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "PongNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pong"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"title": ["PongNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "SpaceInvadersNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_spaceinvader"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"title": ["SpaceInvadersNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "BeamRiderNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_beamrider"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"title": ["BeamRiderNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "SeaquestNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_seaquest"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"title": ["SeaquestNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_atari/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_atari/"],
+					"env": [[{"env_name": "MsPacmanNoFrameskip-v4", "max_num_frames_per_episode": 1e9, "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1, "is_continuing": true}]],
+					"suffix": ["average_clipped_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_mspacman"],
+			"num_runs": [10],
+			"x-label": ["x 100000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepQLearning", "SoftActorCritic", "ProximalPolicyOptimization"],
+
+			"title": ["MsPacmanNoFrameskip"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		}
+	]
+}

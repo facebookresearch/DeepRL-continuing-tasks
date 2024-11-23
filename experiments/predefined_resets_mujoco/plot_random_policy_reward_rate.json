@@ -1,0 +1,131 @@
+{
+	"plots_dir": ["experiments/predefined_resets_mujoco/random_policy_reward_rate"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahnew"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"discount_factor": [0.999],
+			"title": ["DDPG"],
+			"curve_labels": [["task"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"do_not_draw_curves": [true],
+			"plot_percentage": [0.007]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_ant"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"discount_factor": [0.999],
+			"title": ["DDPG"],
+			"curve_labels": [["task"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"do_not_draw_curves": [true],
+			"plot_percentage": [0.007]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"discount_factor": [0.999],
+			"title": ["DDPG"],
+			"curve_labels": [["task"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"do_not_draw_curves": [true],
+			"plot_percentage": [0.007]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"discount_factor": [0.999],
+			"title": ["DDPG"],
+			"curve_labels": [["task"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"do_not_draw_curves": [true],
+			"plot_percentage": [0.007]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"discount_factor": [0.999],
+			"title": ["DDPG"],
+			"curve_labels": [["task"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"do_not_draw_curves": [true],
+			"plot_percentage": [0.007]
+		}
+	]
+}

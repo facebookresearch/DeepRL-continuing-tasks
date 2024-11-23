@@ -1,0 +1,126 @@
+{
+	"plots_dir": ["experiments/no_resets_mujoco/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["Swimmer"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["HumanoidStandup"],
+			"curve_labels": [[ "DDPG", "TD3", "CSAC", "PPO"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reachernew"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["ReacherNew"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_pushernew"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["PusherNew"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_specialant"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["SpecialAnt"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

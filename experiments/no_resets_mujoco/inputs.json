@@ -1,0 +1,199 @@
+{
+    "print_every_x_steps": [10000],
+    "record_period": [10000],
+    "max_steps": [3000000],
+    "eval_max_steps": [10000],
+    "eval_in_episodic_env": [false],
+    "save_model": [true],
+    "model_folder": ["models/"],
+    "video_folder": ["videos/"],
+    "record_visited_observations": [true],
+    "reward_centering": [
+        {
+            "reward_centering:type":[null],
+            "discount_factor": [0.99, 0.999]
+        }
+    ],
+    "algos": [
+        {
+            "policy_learner:type": ["DeepDeterministicPolicyGradient"],
+            "actor_network_instance:type": ["VanillaContinuousActorNetwork"],
+            "critic_network_instance:type": ["EnsembleQValueNetwork"],
+            "critic_member_network:type": ["VanillaQValueNetwork"],
+            "actor_network_instance:hidden_dims": [[256, 256]],
+            "critic_member_network:hidden_dims": [[256, 256]],
+            "critic_network_instance:ensemble_size": [1],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "training_rounds": [1],
+            "batch_size": [256],
+            "actor_soft_update_tau": [0.005],
+            "critic_soft_update_tau": [0.005],
+            "action_representation_module:type": ["IdentityActionRepresentationModule"],
+            "exploration_module:type": ["NormalDistributionExploration"],
+            "exploration_module:mean": [0],
+            "exploration_module:std_dev": [0.1],
+            "exploration_module_wrapper:type": ["Warmup"],
+            "exploration_module_wrapper:warmup_steps": [25000],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [1000000],
+            "learn_every_k_steps": [1],
+            "learning_starts": [25000]
+        },
+        {
+            "policy_learner:type": ["TD3"],
+            "actor_network_instance:type": ["VanillaContinuousActorNetwork"],
+            "critic_network_instance:type": ["EnsembleQValueNetwork"],
+            "critic_member_network:type": ["VanillaQValueNetwork"],
+            "actor_network_instance:hidden_dims": [[256, 256]],
+            "critic_member_network:hidden_dims": [[256, 256]],
+            "critic_network_instance:ensemble_size": [2],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "training_rounds": [1],
+            "batch_size": [256],
+            "actor_soft_update_tau": [0.005],
+            "critic_soft_update_tau": [0.005],
+            "actor_update_freq": [2],
+            "actor_update_noise": [0.2],
+            "actor_update_noise_clip": [0.5],
+            "action_representation_module:type": ["IdentityActionRepresentationModule"],
+            "exploration_module:type": ["NormalDistributionExploration"],
+            "exploration_module:mean": [0],
+            "exploration_module:std_dev": [0.1],
+            "exploration_module_wrapper:type": ["Warmup"],
+            "exploration_module_wrapper:warmup_steps": [25000],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [1000000],
+            "learn_every_k_steps": [1],
+            "learning_starts": [25000]
+        },
+        {
+            "policy_learner:type": ["ContinuousSoftActorCritic"],
+            "actor_network_instance:type": ["GaussianActorNetwork"],
+            "critic_network_instance:type": ["EnsembleQValueNetwork"],
+            "critic_member_network:type": ["VanillaQValueNetwork"],
+            "actor_network_instance:hidden_dims": [[256, 256]],
+            "critic_member_network:hidden_dims": [[256, 256]],
+            "critic_network_instance:ensemble_size": [2],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [1e-3],
+            "training_rounds": [1],
+            "batch_size": [256],
+            "entropy_autotune": [true],
+            "entropy_coef": [0.2],
+            "critic_soft_update_tau": [0.005],
+            "exploration_module:type": ["NoExploration"],
+            "exploration_module_wrapper:type": ["Warmup"],
+            "exploration_module_wrapper:warmup_steps": [5000],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [1000000],
+            "learn_every_k_steps": [1],
+            "learning_starts": [5000]
+        },
+        {
+            "policy_learner:type": ["ProximalPolicyOptimization"],
+            "actor_network_instance:type": ["ClipGaussianActorNetwork"],
+            "critic_network_instance:type": ["VanillaValueNetwork"],
+            "actor_network_instance:hidden_dims": [[64, 64]],
+            "critic_network_instance:hidden_dims": [[64, 64]],
+            "actor_network_instance:hidden_activation": ["tanh"],
+            "critic_network_instance:hidden_activation": ["tanh"],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "training_rounds": [320],
+            "batch_size": [64],
+            "exploration_module:type": ["NoExploration"],
+            "replay_buffer:type": ["OnPolicyReplayBuffer"],
+            "replay_buffer:capacity": [2050],
+            "learn_every_k_steps": [2048],
+            "learning_starts": [0],
+            "is_action_continuous": [true],
+            "epsilon": [0.2],
+            "norm_return": [false],
+            "norm_adv": [true],
+            "clip_value": [false],
+            "max_grad_norm": [0.5]
+        }
+    ],
+
+    "envs_name": [
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]]
+        },
+        {
+            "eval_in_continuing_env": [false],
+            "env": [[{"env_name": "SwimmerNew-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [true],
+            "env": [
+                [{"env_name": "Swimmer-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.01, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "Swimmer-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.001, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "Swimmer-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.0001, "reset_cost": 0, "is_continuing": true}]
+            ],
+            "eval_env_continuing": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [true],
+            "env": [
+                [{"env_name": "HumanoidStandup-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.01, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "HumanoidStandup-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.001, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "HumanoidStandup-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.0001, "reset_cost": 0, "is_continuing": true}]
+            ],
+            "eval_env_continuing": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [true],
+            "env": [
+                [{"env_name": "ReacherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.01, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "ReacherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.001, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "ReacherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.0001, "reset_cost": 0, "is_continuing": true}]
+            ],
+            "eval_env_continuing": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [true],
+            "env": [
+                [{"env_name": "PusherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.01, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "PusherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.001, "reset_cost": 0, "is_continuing": true}],
+                [{"env_name": "PusherNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.0001, "reset_cost": 0, "is_continuing": true}]
+            ],
+            "eval_env_continuing": [[{"env_name": "PusherNew-no-timeout-v4", "is_continuing": true}]]
+        },
+        {
+            "eval_in_continuing_env": [true],
+            "env": [
+                [{"env_name": "SpecialAnt-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.01, "reset_cost": 0, "is_continuing": true, "terminate_when_unhealthy": false}],
+                [{"env_name": "SpecialAnt-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.001, "reset_cost": 0, "is_continuing": true, "terminate_when_unhealthy": false}],
+                [{"env_name": "SpecialAnt-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0.0001, "reset_cost": 0, "is_continuing": true, "terminate_when_unhealthy": false}]
+            ],
+            "eval_env_continuing": [[{"env_name": "SpecialAnt-no-timeout-v4", "is_continuing": true, "terminate_when_unhealthy": false}]]
+        }
+    ]
+}

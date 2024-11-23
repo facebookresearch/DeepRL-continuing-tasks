@@ -1,0 +1,130 @@
+{
+	"plots_dir": ["experiments/no_resets_mujoco/reduced_state_space_improvement_table"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				},
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "SwimmerNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["dashed"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"do_not_draw_curves": [true],
+			"title": ["DDPG"],
+			"curve_labels": [["task", "reset"]],
+			"criterion": ["last10_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				},
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "SwimmerNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["dashed"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+			"do_not_draw_curves": [true],
+			"title": ["TD3"],
+			"curve_labels": [["task", "reset"]],
+			"criterion": ["last10_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				},
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "SwimmerNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["dashed"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+			"do_not_draw_curves": [true],
+			"title": ["CSAC"],
+			"curve_labels": [["task", "reset"]],
+			"criterion": ["last10_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "Swimmer-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["solid"]
+				},
+				{
+					"exp_input_file": ["experiments/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["experiments/no_resets_mujoco/"],
+					"env": [[{"env_name": "SwimmerNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"linestyle": ["dashed"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_swimmer_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"y-label": ["avg\nreward"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+			"do_not_draw_curves": [true],
+			"title": ["PPO"],
+			"curve_labels": [["task", "reset"]],
+			"criterion": ["last10_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}
