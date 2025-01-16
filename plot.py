@@ -2,7 +2,8 @@
 # All rights reserved.
 #
 # This source code is licensed under the MIT license found in the
-# LICENSE file in the root directory of this source tree.
+# LICENSE file in the root directory of this source tree
+
 
 import argparse
 import os
@@ -23,6 +24,9 @@ def get_stats_learning_curves_to_print(data_x_runs, criterion):
     if "last10" in criterion:
         mean = data_x_runs[:, -10:].mean()
         ste = data_x_runs[:, -10:].mean(1).std(ddof=1) / np.sqrt(data_x_runs.shape[0])
+    elif "last50" in criterion:
+        mean = data_x_runs[:, -50:].mean()
+        ste = data_x_runs[:, -50:].mean(1).std(ddof=1) / np.sqrt(data_x_runs.shape[0])
     elif "last" in criterion:
         mean = data_x_runs[:, -1].mean()
         ste = data_x_runs[:, -1].std(ddof=1) / np.sqrt(data_x_runs.shape[0])
@@ -97,16 +101,60 @@ class Plotter(object):
                 except:
                     print(file_path + " not found")
             if not all_lists_same_length(data_x_runs):
+                print("not all lists have same length")
                 return
-            if len(data_x_runs) == 0 or len(data_x_runs[0]) == 1:
-                return
+            # if len(data_x_runs) == 0 or len(data_x_runs[0]) == 1:
+            #     return
 
             data_x_runs = np.array(data_x_runs)
+
             if "reward_offset" in plot_dict:
                 data_x_runs = data_x_runs - plot_dict["reward_offset"]
+            if "reset_cost" in plot_dict:
+                if "suffix" in plot_dict and (
+                    plot_dict["suffix"] == "average_reward"
+                    or plot_dict["suffix"] == "average_clipped_reward"
+                ):
+                    file_names = [
+                        f"{id}_average_reset.npy" for id in param_setting["ids"]
+                    ]
+                elif "suffix" in plot_dict and (
+                    plot_dict["suffix"] == "eval_average_reward"
+                    or plot_dict["suffix"] == "eval_average_clipped_reward"
+                ):
+                    file_names = [
+                        f"{id}_eval_average_reset.npy" for id in param_setting["ids"]
+                    ]
+                else:
+                    raise NotImplementedError
+                data_avg_reset_runs = []
+                for file_name in file_names:
+                    file_path = os.path.join(plot_dict["exp_output_dir"], file_name)
+                    try:
+                        data_avg_reset_runs.append(
+                            np.nan_to_num(np.load(file_path), nan=nan_replacement)
+                        )
+                    except:
+                        print(file_path + " not found")
+                if not all_lists_same_length(data_avg_reset_runs):
+                    return
+                if len(data_avg_reset_runs) == 0 or len(data_avg_reset_runs[0]) == 1:
+                    return
+                data_x_runs = (
+                    data_x_runs
+                    - np.array(data_avg_reset_runs) * plot_dict["reset_cost"]
+                )
             data_x_runs = data_x_runs[:, : int(data_x_runs.shape[1] * plot_percentage)]
             mean_curve = data_x_runs.mean(0)
             ste_curve = data_x_runs.std(0, ddof=1) / np.sqrt(data_x_runs.shape[0])
+            if plot_dict.get("as_reference", False):
+                np.set_printoptions(precision=2, threshold=np.inf)
+                mean_curve = np.ones(len(mean_curve)) * data_x_runs[:, -10:].mean()
+                ste_curve = (
+                    np.ones(len(mean_curve))
+                    * data_x_runs[:, -50:].mean(1).std(0, ddof=1)
+                    / np.sqrt(data_x_runs.shape[0])
+                )
             mean_to_print, ste_to_print = get_stats_learning_curves_to_print(
                 data_x_runs, plot_dict["criterion"]
             )
@@ -140,39 +188,44 @@ class Plotter(object):
         x_list = np.arange(mean_curve_to_draw.shape[0])
         if plot_dict.get("draw_all_curves_only", False):
             for i in range(len(all_curves_to_draw)):
-                plt.plot(
-                    x_list,
-                    all_curves_to_draw[i],
-                    linewidth=1,
-                    linestyle=plot_dict["linestyle"],
-                )
+                plt.plot(x_list, all_curves_to_draw[i], linewidth=1)
             return
+
+        plot_kwargs = {}
+        if (
+            "curve_colors" in plot_dict
+            and plot_dict["curve_colors"][curve_num] is not None
+        ):
+            plot_kwargs["color"] = plot_dict["curve_colors"][curve_num]
+        if "linestyle" in plot_dict and plot_dict["linestyle"][curve_num] is not None:
+            plot_kwargs["linestyle"] = plot_dict["linestyle"][curve_num]
+        if (
+            "curve_labels" in plot_dict
+            and plot_dict["curve_labels"][curve_num] is not None
+        ):
+            plot_kwargs["label"] = plot_dict["curve_labels"][curve_num]
+        if (
+            "curve_markers" in plot_dict
+            and plot_dict["curve_markers"][curve_num] is not None
+        ):
+            plot_kwargs["marker"] = plot_dict["curve_markers"][curve_num]
+
+        plt.plot(
+            x_list,
+            mean_curve_to_draw,
+            linewidth=1,
+            **plot_kwargs,
+        )
         if "curve_labels" in plot_dict:
-            if "linestyle" in plot_dict and "curve_colors" in plot_dict:
-                plt.plot(
-                    x_list,
-                    mean_curve_to_draw,
-                    linewidth=1,
-                    linestyle=plot_dict["linestyle"],
-                    label=plot_dict["curve_labels"][curve_num],
-                    color=plot_dict["curve_colors"][curve_num],
-                )
+            if "label_loc" in plot_dict:
+                plt.legend(loc=plot_dict["label_loc"])
             else:
-                plt.plot(
-                    x_list,
-                    mean_curve_to_draw,
-                    linewidth=1,
-                    label=plot_dict["curve_labels"][curve_num],
-                )
-            plt.legend(loc=plot_dict["label_loc"])
-        else:
-            plt.plot(
-                x_list,
-                mean_curve_to_draw,
-                linewidth=1,
-                linestyle=plot_dict["linestyle"],
-            )
-        if "linestyle" in plot_dict and "curve_colors" in plot_dict:
+                plt.legend()
+
+        if (
+            "curve_colors" in plot_dict
+            and plot_dict["curve_colors"][curve_num] is not None
+        ):
             plt.fill_between(
                 x_list,
                 mean_curve_to_draw - ste_curve_to_draw,

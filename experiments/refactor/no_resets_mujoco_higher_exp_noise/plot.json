@@ -1,0 +1,142 @@
+{
+	"plots_dir": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy_learner:type": ["DeepDeterministicPolicyGradient"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy": [
+						{
+							"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+							"exploration_module:std_dev": [0.5]
+						}
+					]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"eval_env_continuing": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["eval_average_reward"],
+					"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+					"as_reference": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_ddpg"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+
+			"ymin": [40],
+			"ymax": [160],
+			"title": ["HumanoidStandup"],
+			"curve_labels": [[ "std 0.1", "std 0.5", null]],
+			"curve_colors": [["#1f77b4", "black", "#1f77b4"]],
+			"linestyle": [["-", "-", "--"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy_learner:type": ["TD3"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy": [
+						{
+							"policy_learner:type": ["TD3"],
+							"exploration_module:std_dev": [0.5]
+						}
+					]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"eval_env_continuing": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["eval_average_reward"],
+					"policy_learner:type": ["TD3"],
+					"as_reference": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_td3"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"ymin": [40],
+			"ymax": [160],
+			"title": ["HumanoidStandup"],
+			"curve_labels": [[ "std 0.1", "std 0.5", null]],
+			"curve_colors": [["#ff7f0e", "black", "#ff7f0e"]],
+			"linestyle": [["-", "-", "--"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy_learner:type": ["ContinuousSoftActorCritic"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"policy": [
+						{
+							"policy_learner:type": ["ContinuousSoftActorCritic"],
+							"target_entropy_offset": [6]
+						}
+					]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco/"],
+					"eval_env_continuing": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["eval_average_reward"],
+					"policy_learner:type": ["ContinuousSoftActorCritic"],
+					"as_reference": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"ymin": [40],
+			"ymax": [160],
+			"title": ["HumanoidStandup"],
+			"curve_labels": [[ "offset 0", "offset 6", null]],
+			"curve_colors": [["#2ca02c", "black", "#2ca02c"]],
+			"linestyle": [["-", "-", "--"]],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

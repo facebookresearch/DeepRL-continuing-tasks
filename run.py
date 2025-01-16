@@ -16,27 +16,38 @@ import random
 
 import subprocess
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Type
 
+# pyre-fixme
 import ale_py
 import gymnasium as gym
-
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
+
+# pyre-fixme
 from alphaex.sweeper import Sweeper
 from pearl import action_representation_modules
 from pearl.action_representation_modules import IdentityActionRepresentationModule
+from pearl.action_representation_modules.action_representation_module import (
+    ActionRepresentationModule,
+)
+from pearl.api.observation import Observation
 from pearl.neural_networks.common import value_networks
 from pearl.neural_networks.common.utils import (
     kaiming_normal_init_weights,
     orthogonal_init_weights,
     xavier_init_weights,
 )
+from pearl.neural_networks.common.value_networks import ValueNetwork
 from pearl.neural_networks.sequential_decision_making import (
     actor_networks,
     q_value_networks,
+)
+from pearl.neural_networks.sequential_decision_making.actor_networks import ActorNetwork
+from pearl.neural_networks.sequential_decision_making.q_value_networks import (
+    QValueNetwork,
 )
 from pearl.pearl_agent import PearlAgent
 from pearl.policy_learners import sequential_decision_making as policy_learners
@@ -50,12 +61,38 @@ from pearl.policy_learners.exploration_modules.common.epsilon_greedy_exploration
 from pearl.policy_learners.exploration_modules.common.no_exploration import (
     NoExploration,
 )
+from pearl.policy_learners.exploration_modules.exploration_module import (
+    ExplorationModule,
+)
+from pearl.policy_learners.exploration_modules.exploration_module_wrapper import (
+    ExplorationModuleWrapper,
+)
 from pearl.policy_learners.exploration_modules.wrappers.warmup import Warmup
-from pearl.replay_buffers import sequential_decision_making as replay_buffers
+from pearl.policy_learners.sequential_decision_making.ddpg import (
+    DeepDeterministicPolicyGradient,
+)
+from pearl.policy_learners.sequential_decision_making.deep_q_learning import (
+    DeepQLearning,
+)
+from pearl.policy_learners.sequential_decision_making.ppo import (
+    ProximalPolicyOptimization,
+)
+from pearl.policy_learners.sequential_decision_making.soft_actor_critic import (
+    SoftActorCritic,
+)
+from pearl.policy_learners.sequential_decision_making.soft_actor_critic_continuous import (
+    ContinuousSoftActorCritic,
+)
+from pearl.policy_learners.sequential_decision_making.td3 import TD3
+from pearl.replay_buffers import (
+    ReplayBuffer,
+    sequential_decision_making as replay_buffers,
+)
 
 from pearl.user_envs.wrappers import (
     AgentResetWrapper,
     EpisodicLifeEnv,
+    EpisodicWrapper,
     FireResetEnv,
     HalfCheetahWrapper,
     MaxAndSkipEnv,
@@ -91,19 +128,27 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
 
 
-def get_env(env_config: Dict[str, Any]) -> GymEnvironment:
+def get_env(env_config_list: List[Dict[str, Any]]) -> GymEnvironment:
     """
     attach a versatility wrapper to the environment
     """
-    env_config = env_config[0]
+    env_config: Dict[str, Any] = env_config_list[0]
 
-    if env_config.get("reset_cost_wrapper", False):
+    if env_config.get("reset_wrapper", False):
         return GymEnvironment(
             ResetWrapper(
                 env=get_gym_env(env_config),
                 random_reset_prob=env_config.get("random_reset_prob", None),
                 reset_cost=env_config.get("reset_cost", None),
-                is_continuing=env_config.get("is_continuing", None),
+            )
+        )
+
+    if env_config.get("episodic_wrapper", False):
+        return GymEnvironment(
+            EpisodicWrapper(
+                env=get_gym_env(env_config),
+                random_reset_prob=env_config.get("random_reset_prob", None),
+                reset_cost=env_config.get("reset_cost", None),
             )
         )
 
@@ -131,7 +176,7 @@ def env_supports_termination_when_unhealthy(env_name: str) -> bool:
     )
 
 
-def get_gym_env(env_config: Dict) -> gym.Env:
+def get_gym_env(env_config: Dict[str, Any]) -> gym.Env:
     env_name = env_config.get("env_name", None)
     if env_name is None:
         raise ValueError("env_name is not specified")
@@ -197,7 +242,9 @@ def get_gym_env(env_config: Dict) -> gym.Env:
         env = gym.wrappers.RecordEpisodeStatistics(env)
         env = NoopResetEnv(env, noop_max=30)
         env = MaxAndSkipEnv(env, skip=4)
-        env = EpisodicLifeEnv(env)
+        if env_config.get("use_episodic_life", False):
+            env = EpisodicLifeEnv(env)
+        # pyre-fixme
         if "FIRE" in env.unwrapped.get_action_meanings():
             env = FireResetEnv(env)
         env = gym.wrappers.ResizeObservation(env, (84, 84))
@@ -218,7 +265,7 @@ def get_gym_env(env_config: Dict) -> gym.Env:
             )
 
 
-def generate_video(imgs, save_folder, video_name) -> None:
+def generate_video(imgs: List[np.ndarray], save_folder: str, video_name: str) -> None:
     """
     create a video using images from imgs.
     imgs: a list of np arrays representing a list of images
@@ -249,107 +296,167 @@ def generate_video(imgs, save_folder, video_name) -> None:
         ]
     )
 
-    # Remove the generated png files.
-    for file_name in glob.glob(f"{save_folder}/{video_name}*.png"):
-        os.remove(file_name)
+    # # Remove the generated png files.
+    # for file_name in glob.glob(f"{save_folder}/{video_name}*.png"):
+    #     os.remove(file_name)
 
 
-def evaluate(
-    agent,
-    env,
-    output_dir,
-    video_dir,
-    name,
-    render,
-    max_steps,
-    run_idx,
-    preprocessors,
+def eval_agent(
+    agent: PearlAgent,
+    envs: List[GymEnvironment],
+    output_dir: str,
+    video_dir: str,
+    name: str,
+    render: bool,
+    run_idx: int,
+    preprocessors: List[Preprocessor],
+    max_steps: int = 10000,
+    max_episodes: int = 10,
+    eval_in_episodic_env: bool = False,
+    eval_in_continuing_env: bool = False,
+    # pyre-fixme
     qpos=None,  # for mujoco env
+    # pyre-fixme
     qvel=None,  # for mujoco env
 ) -> None:
-
-    # evaluate the agent in the continuing version of the environment
-    logger.info(f"evaluating {name}, run {run_idx}")
-    if hasattr(agent.policy_learner.exploration_module, "set_test_time_true"):
-        # Do not change counter in the exploration module during evaluation
-        agent.policy_learner.exploration_module.set_test_time_true()
-    if hasattr(agent.policy_learner, "_test_time"):
-        agent.policy_learner._test_time = True
-    for p in preprocessors:
-        if hasattr(p, "_test_time"):
-            p._test_time = True
-
-    observation, action_space = env.reset()
-    if qpos is not None and qvel is not None:
-        env.env.set_state(qpos, qvel)
-    print_every_x_steps = 1000
-    last_cum_reward_print = 0
-    last_cum_reset_print = 0
-    eval_cum_reward = 0
-    eval_cum_reward_no_reset_cost = 0
-    eval_cum_reset = 0
-    frames = []
-    agent.reset(observation, action_space)
-
-    for step in range(1, max_steps + 1):
-        if render is True:
-            frames.append(env.env.render())
-        action = agent.act(exploit=False)
-        action = (
-            action.cpu() if isinstance(action, torch.Tensor) else action
-        )  # action can be int sometimes
-        action_result = env.step(action)
-        for preprocessor in preprocessors:
-            preprocessor.process(action_result)
-        eval_cum_reward += action_result.reward
-        if "reset" in action_result.info:
-            eval_cum_reset += action_result.info["reset"]
-        if action_result.info["reset"] == False:
-            eval_cum_reward_no_reset_cost += action_result.reward
-        agent.observe(action_result)
-        if step % print_every_x_steps == 0:
-            logger.info(
-                f"step {step}, agent={agent}, name={name}, average_reward={(eval_cum_reward - last_cum_reward_print) / print_every_x_steps}, average_reset={(eval_cum_reset - last_cum_reset_print) / print_every_x_steps}",
-            )
-            last_cum_reward_print = eval_cum_reward
-            last_cum_reset_print = eval_cum_reset
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if not os.path.exists(video_dir):
         os.makedirs(video_dir)
-    if render is True:
-        generate_video(frames, video_dir, video_name=name + "_" + str(run_idx))
-    logger.info(f"{output_dir}/{run_idx}_final.npy")
-    np.save(
-        f"{output_dir}/{run_idx}_final.npy",
-        np.array(
-            [
-                eval_cum_reward / max_steps,
-                eval_cum_reward_no_reset_cost / max_steps,
-                eval_cum_reset,
-            ]
-        ),
+    if eval_in_episodic_env is False and eval_in_continuing_env is False:
+        print(
+            "Do not have evaluation environment. Evaluate in the training environment (assumed to be continuing)."
+        )
+        eval_in_continuing_env = True
+
+    # evaluate the agent in the continuing version of the environment
+    logger.info(
+        f"evaluating {name}, run {run_idx}, eval_in_episodic_env {eval_in_episodic_env}, eval_in_continuing_env {eval_in_continuing_env}"
     )
-    return None
-
-
-def offline_eval(
-    eval_agent,
-    envs,
-    eval_max_steps,
-    preprocessors,
-    eval_in_episodic_env=False,
-    eval_in_continuing_env=False,
-) -> Tuple[Optional[float], Optional[float], Optional[float], Optional[float]]:
-    agent = eval_agent
     if hasattr(agent.policy_learner.exploration_module, "set_test_time_true"):
         # Do not change counter in the exploration module during evaluation
+        # pyre-fixme
         agent.policy_learner.exploration_module.set_test_time_true()
     if hasattr(agent.policy_learner, "_test_time"):
         agent.policy_learner._test_time = True
     for p in preprocessors:
         if hasattr(p, "_test_time"):
+            # pyre-fixme
             p._test_time = True
+    if eval_in_episodic_env:
+        assert envs[1] is not None
+        if qpos is not None and qvel is not None:
+            # pyre-fixme
+            envs[1].env.set_state(qpos, qvel)
+        # evaluate the agent in the episodic version of the environment
+        eps_return_list = []
+        episode_steps = 0
+        total_steps = 0
+        eps_return = 0
+        for e in range(max_episodes):
+            info, episode_steps = run_episode(
+                agent=agent,
+                # pyre-fixme
+                env=envs[1],
+                exploit=False,
+                learn=False,
+                preprocessors=preprocessors,
+                total_steps=total_steps,
+                number_of_steps=max_steps,  # max_steps,
+            )
+            total_steps += episode_steps
+            (
+                eps_return_list.append(info["return"])
+                if "clipped_return" not in info
+                else eps_return_list.append(info["clipped_return"])
+            )
+            print("episode", e, "return", eps_return_list[-1])
+        eps_return = np.mean(eps_return_list)
+
+        logger.info(f"{output_dir}/{run_idx}_episodic_final.npy")
+        np.save(
+            f"{output_dir}/{run_idx}_episodic_final.npy",
+            np.array(
+                [
+                    eps_return,
+                ]
+            ),
+        )
+    if eval_in_continuing_env:
+        env = envs[2] if envs[2] is not None else envs[0]
+        observation, action_space = env.reset()
+        if qpos is not None and qvel is not None:
+            # pyre-fixme
+            envs[2].env.set_state(qpos, qvel)
+        print_every_x_steps = 1000
+        last_cum_reward_print = 0
+        last_cum_reset_print = 0
+        eval_cum_reward = 0
+        eval_cum_reset = 0
+        frames = []
+        agent.reset(observation, action_space)
+        for step in range(1, max_steps + 1):
+            if render is True:
+                frames.append(env.env.render())
+            action = agent.act(exploit=False)
+            action = (
+                action.cpu() if isinstance(action, torch.Tensor) else action
+            )  # action can be int sometimes
+            action_result = env.step(action)
+            for preprocessor in preprocessors:
+                preprocessor.process(action_result)
+            eval_cum_reward += action_result.reward
+            print("step", step, "reward", action_result.reward)
+            if "reset" in action_result.info:
+                eval_cum_reset += action_result.info["reset"]
+                print(step, "reset", action_result.info["reset"], action[-1])
+            agent.observe(action_result)
+            if step % print_every_x_steps == 0:
+                logger.info(
+                    f"step {step}, agent={agent}, name={name}, average_reward={(eval_cum_reward - last_cum_reward_print) / print_every_x_steps}, average_reset={(eval_cum_reset - last_cum_reset_print) / print_every_x_steps}",
+                )
+                last_cum_reward_print = eval_cum_reward
+                last_cum_reset_print = eval_cum_reset
+        if render is True:
+            generate_video(
+                frames, video_dir, video_name=name + "_continuing_" + str(run_idx)
+            )
+        logger.info(f"{output_dir}/{run_idx}_continuing_final.npy")
+        np.save(
+            f"{output_dir}/{run_idx}_continuing_final.npy",
+            np.array(
+                [
+                    eval_cum_reward / max_steps,
+                    eval_cum_reset / max_steps,
+                ]
+            ),
+        )
+    return None
+
+
+def offline_eval(
+    eval_agent: PearlAgent,
+    envs: List[Optional[GymEnvironment]],
+    eval_max_steps: int,
+    preprocessors: List[Preprocessor],
+    eval_in_episodic_env: bool = False,
+    eval_in_continuing_env: bool = False,
+) -> Tuple[
+    Optional[float], Optional[float], Optional[float], Optional[float], Optional[float]
+]:
+    agent = eval_agent
+    # switch from training to evaluation
+    if hasattr(agent.policy_learner.exploration_module, "set_test_time_true"):
+        # Do not change counter in the exploration module during evaluation
+        # pyre-fixme
+        agent.policy_learner.exploration_module.set_test_time_true()
+    if hasattr(agent.policy_learner, "_test_time"):
+        agent.policy_learner._test_time = True
+    for p in preprocessors:
+        if hasattr(p, "_test_time"):
+            # pyre-fixme
+            p._test_time = True
+
     if eval_in_episodic_env:
         assert envs[1] is not None
         # evaluate the agent in the episodic version of the environment
@@ -358,10 +465,10 @@ def offline_eval(
         episode_steps = 0
         total_steps = 0
         eps_return = 0
-
         while total_steps < eval_max_steps:
             info, episode_steps = run_episode(
                 agent=agent,
+                # pyre-fixme
                 env=envs[1],
                 exploit=False,
                 learn=False,
@@ -383,66 +490,84 @@ def offline_eval(
         eps_clipped_return = None
 
     if eval_in_continuing_env:
-        assert envs[2] is not None
         # evaluate the agent in the continuing version of the environment
+        # pyre-fixme
         observation, action_space = envs[2].reset()
         agent.reset(observation, action_space)
-        eval_cum_reward = 0
+        eval_cum_reward, eval_cum_reset = 0, 0
+
+        # deal with reward clipping
         use_reward_clipping = False
         for preprocessor in preprocessors:
             if isinstance(preprocessor, RewardClipping):
                 use_reward_clipping = True
                 break
-        if use_reward_clipping:
-            eval_cum_clipped_reward = 0
-        else:
-            eval_cum_clipped_reward = None
+        eval_cum_clipped_reward = 0 if use_reward_clipping else None
+
         for _ in range(1, eval_max_steps + 1):
+            # the agent takes an action
             action = agent.act(exploit=False)
             action = (
                 action.cpu() if isinstance(action, torch.Tensor) else action
             )  # action can be int sometimes
+
+            # the environment receives the action and returns the result
+            # pyre-fixme
             action_result = envs[2].step(action)
+
+            # update stats
             eval_cum_reward += action_result.reward
+            eval_cum_reset += int(action_result.info.get("reset", False))
+
+            # clip the reward here if specified
             for preprocessor in preprocessors:
                 preprocessor.process(action_result)
             if use_reward_clipping:
                 eval_cum_clipped_reward += action_result.reward
+
+            # the agent receives the action result
             agent.observe(action_result)
         avg_reward = eval_cum_reward / eval_max_steps
-        if eval_cum_clipped_reward is not None:
-            avg_clipped_reward = eval_cum_clipped_reward / eval_max_steps
-        else:
-            avg_clipped_reward = None
+        avg_reset = eval_cum_reset / eval_max_steps
+        avg_clipped_reward = (
+            eval_cum_clipped_reward / eval_max_steps
+            if eval_cum_clipped_reward is not None
+            else None
+        )
     else:
         avg_reward = None
+        avg_reset = None
         avg_clipped_reward = None
-    logger.info(f"offline eval, epsodic return {eps_return}, avg reward {avg_reward}")
+    # recover from testing to training
+    logger.info(
+        f"offline eval, epsodic return {eps_return}, episodic clipped return {eps_clipped_return}, avg reward {avg_reward}, avg clipped reward {avg_clipped_reward}, avg reset {avg_reset}"
+    )
+    # recover from testing to training
     if hasattr(agent.policy_learner.exploration_module, "set_test_time_false"):
-        # Do not change counter in the exploration module during evaluation
+        # pyre-fixme
         agent.policy_learner.exploration_module.set_test_time_false()
     if hasattr(agent.policy_learner, "_test_time"):
         agent.policy_learner._test_time = False
     for p in preprocessors:
         if hasattr(p, "_test_time"):
             p._test_time = False
-    return eps_return, avg_reward, eps_clipped_return, avg_clipped_reward
+    return eps_return, avg_reward, eps_clipped_return, avg_clipped_reward, avg_reset
 
 
 def run_episode(
     agent: PearlAgent,
-    env,
+    env: GymEnvironment,
     exploit: bool = True,
     learn_after_episode: bool = False,
     learn_every_k_steps: int = 1,
     total_steps: int = 0,
-    seed=None,
+    seed: Optional[int] = None,
     learn: bool = True,
     learning_start: int = 0,
-    preprocessors: Optional[List[Preprocessor]] = None,
-    learning_report_cache: Optional[Dict[str, List[float]]] = None,
+    preprocessors: List[Preprocessor] = [],
+    learning_report_cache: Dict[str, List[float]] = {},
     number_of_steps: Optional[int] = None,
-    visited_observations: Optional[List[Any]] = None,
+    visited_observations: Optional[List[Observation]] = None,
 ) -> Tuple[Dict[str, Any], int]:
     """
     Runs one episode and returns an info dict and number of steps taken.
@@ -463,24 +588,35 @@ def run_episode(
     observation, action_space = env.reset()
     agent.reset(observation, action_space)
     cum_reward = 0
+
+    # reward clipping initialization
     use_reward_clipping = False
     for preprocessor in preprocessors:
         if isinstance(preprocessor, RewardClipping):
             use_reward_clipping = True
             break
-    if use_reward_clipping:
-        cum_clipped_reward = 0
+    cum_clipped_reward = 0 if use_reward_clipping else None
+
     done = False
     episode_steps = 0
     info = {}
 
     while not done:
+        # the agent takes an action
         action = agent.act(exploit=exploit)
         action = (
             action.cpu() if isinstance(action, torch.Tensor) else action
         )  # action can be int sometimes
+
+        # the environment receives the action and returns the result
         action_result = env.step(action)
-        if visited_observations is not None and total_steps + episode_steps % 1000 == 0:
+
+        # update stats
+        if (
+            visited_observations is not None
+            and total_steps + episode_steps % 1000 == 0
+            and total_steps + episode_steps <= 1000000
+        ):
             visited_observations.append(action_result.observation)
         if "episode" in action_result.info:
             logger.info(action_result.info["episode"]["r"])
@@ -490,7 +626,10 @@ def run_episode(
             preprocessor.process(action_result)
         if use_reward_clipping:
             cum_clipped_reward += action_result.reward
+
+        # the agent observes the result
         agent.observe(action_result)
+
         done = action_result.truncated or action_result.terminated
         episode_steps += 1
         if learn and total_steps + episode_steps >= learning_start:
@@ -520,7 +659,12 @@ def run_episode(
     return info, episode_steps
 
 
-def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
+def run_episodes(
+    train_agent: PearlAgent,
+    eval_agent: PearlAgent,
+    envs: List[Optional[GymEnvironment]],
+    param_sweeper_dict: Dict[str, Any],
+) -> None:
     print_every_x_steps = param_sweeper_dict["print_every_x_steps"]
     learn_every_k_steps = param_sweeper_dict["learn_every_k_steps"]
     record_period = param_sweeper_dict["record_period"]
@@ -531,21 +675,38 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
     total_episodes = 0
     info = {}
     info_period = {}
-    eval_episodic_return_list, eval_average_reward_list, eval_episodic_clipped_return_list, eval_average_clipped_reward_list = [], [], [], []  # noqa
+    # evaluation stats initialization
+    if param_sweeper_dict["eval_in_continuing_env"]:
+        (
+            eval_average_reward_list,
+            eval_average_clipped_reward_list,
+            eval_average_reset_list,
+        ) = ([], [], [])
+    else:
+        (
+            eval_average_reward_list,
+            eval_average_clipped_reward_list,
+            eval_average_reset_list,
+        ) = (None, None, None)
+    if param_sweeper_dict["eval_in_episodic_env"]:
+        eval_episodic_return_list, eval_episodic_clipped_return_list = [], []
+    else:
+        eval_episodic_return_list, eval_episodic_clipped_return_list = None, None
     agent = train_agent
     env = envs[0]  # train env
     learning_report = {}
     learning_report_cache = {}
     start_time = time.time()
     last_timed_steps = 0
-    if param_sweeper_dict.get("record_visited_observations", False) is True:
-        visited_observations = []
-    else:
-        visited_observations = None
+
+    visited_observations = (
+        [] if param_sweeper_dict.get("record_visited_observations", False) else None
+    )
     while True:
         if total_steps >= number_of_steps:
             break
         old_total_steps = total_steps
+        assert env is not None
         episode_info, episode_total_steps = run_episode(
             agent,
             env,
@@ -560,8 +721,11 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
             number_of_steps=number_of_steps,
             visited_observations=visited_observations,
         )
+
         total_steps += episode_total_steps
         total_episodes += 1
+
+        # print stats
         if old_total_steps // print_every_x_steps < total_steps // print_every_x_steps:
             logger.info(
                 f"episode {total_episodes}, steps {total_steps}, agent={agent}, env={env}",
@@ -576,8 +740,9 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
 
         for key in episode_info:
             info_period.setdefault(key, []).append(episode_info[key])
-        if old_total_steps // record_period < total_steps // record_period:
 
+        # record stats
+        if old_total_steps // record_period < total_steps // record_period:
             # record average info value every record_period steps
             num_repeating_recordings = (total_steps // record_period) - (
                 old_total_steps // record_period
@@ -587,25 +752,31 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
                     info.setdefault(key, []).append(np.mean(info_period[key]))
             info_period = {}
             # evaluate the learned policy in the episodic and continuing versions of the environment
-            eps_return, avg_reward, eps_clipped_return, average_clipped_reward = (
-                offline_eval(
-                    eval_agent=eval_agent,
-                    envs=envs,
-                    eval_max_steps=eval_max_steps,
-                    preprocessors=param_sweeper_dict["preprocessors"],
-                    eval_in_episodic_env=param_sweeper_dict["eval_in_episodic_env"],
-                    eval_in_continuing_env=param_sweeper_dict["eval_in_continuing_env"],
-                )
+            (
+                eps_return,
+                avg_reward,
+                eps_clipped_return,
+                average_clipped_reward,
+                avg_reset,
+            ) = offline_eval(
+                eval_agent=eval_agent,
+                envs=envs,
+                eval_max_steps=eval_max_steps,
+                preprocessors=param_sweeper_dict["preprocessors"],
+                eval_in_episodic_env=param_sweeper_dict["eval_in_episodic_env"],
+                eval_in_continuing_env=param_sweeper_dict["eval_in_continuing_env"],
             )
             for _ in range(num_repeating_recordings):
-                if eps_return is not None:
+                if eval_episodic_return_list is not None:
                     eval_episodic_return_list.append(eps_return)
-                if avg_reward is not None:
+                if eval_average_reward_list is not None:
                     eval_average_reward_list.append(avg_reward)
-                if eps_clipped_return is not None:
+                if eval_episodic_clipped_return_list is not None:
                     eval_episodic_clipped_return_list.append(eps_clipped_return)
-                if average_clipped_reward is not None:
+                if eval_average_clipped_reward_list is not None:
                     eval_average_clipped_reward_list.append(average_clipped_reward)
+                if eval_average_reset_list is not None:
+                    eval_average_reset_list.append(avg_reset)
                 for key in learning_report_cache:
                     learning_report.setdefault(key, []).append(
                         np.mean(learning_report_cache[key])
@@ -620,26 +791,30 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
             np.save(f"{output_dir}/{run_idx}_episodic_clipped_return.npy", info[key])
         if key == "full_return":
             np.save(f"{output_dir}/{run_idx}_episodic_full_return.npy", info[key])
-    if len(eval_episodic_return_list) > 0:
+    if eval_episodic_return_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_episodic_return.npy",
             np.array(eval_episodic_return_list),
         )
-    if len(eval_average_reward_list) > 0:
+    if eval_average_reward_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_average_reward.npy",
             np.array(eval_average_reward_list),
         )
-
-    if len(eval_episodic_clipped_return_list) > 0:
+    if eval_episodic_clipped_return_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_episodic_clipped_return.npy",
             np.array(eval_episodic_clipped_return_list),
         )
-    if len(eval_average_clipped_reward_list) > 0:
+    if eval_average_clipped_reward_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_average_clipped_reward.npy",
             np.array(eval_average_clipped_reward_list),
+        )
+    if eval_average_reset_list is not None:
+        np.save(
+            f"{output_dir}/{run_idx}_eval_average_reset.npy",
+            np.array(eval_average_reset_list),
         )
 
     for key in learning_report:
@@ -647,14 +822,19 @@ def run_episodes(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
             f"{output_dir}/{run_idx}_{key}.npy",
             np.array(learning_report[key]),
         )
-    if param_sweeper_dict.get("record_visited_observations", False) is True:
+    if visited_observations is not None:
         np.save(
             f"{output_dir}/{run_idx}_visited_observations.npy",
             np.array(visited_observations),
         )
 
 
-def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
+def run_steps(
+    train_agent: PearlAgent,
+    eval_agent: PearlAgent,
+    envs: List[Optional[GymEnvironment]],
+    param_sweeper_dict: Dict[str, Any],
+) -> None:
     print_every_x_steps = param_sweeper_dict["print_every_x_steps"]
     learn_every_k_steps = param_sweeper_dict["learn_every_k_steps"]
     record_period = param_sweeper_dict["record_period"]
@@ -663,8 +843,11 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
     eval_max_steps = param_sweeper_dict["eval_max_steps"]
     env = envs[0]  # train env
     agent = train_agent
+    assert env is not None
     observation, action_space = env.reset()
     agent.reset(observation, action_space)
+
+    # reward stats initialization
     cum_reward = 0
     avg_reward_list = []
     eval_average_reward_list = []  # used only when eval_env_continuing is not None
@@ -673,98 +856,167 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
     eval_episodic_clipped_return_list = []
     last_cum_reward_print = cum_reward
     last_cum_reward_record = cum_reward
+
+    # reset stats initialization
+    cum_reset = 0
+    avg_reset_list = []
+    last_cum_reset_print = cum_reset
+    last_cum_reset_record = cum_reset
+
+    # evaluation stats initialization
+    if param_sweeper_dict["eval_in_continuing_env"]:
+        eval_average_reward_list = []
+        eval_average_reset_list = []
+    else:
+        eval_average_reward_list = None
+        eval_average_reset_list = None
+
+    eval_episodic_return_list = (
+        [] if param_sweeper_dict["eval_in_episodic_env"] else None
+    )
+
     learning_report = {}
     learning_report_cache = {}
     start_time = time.time()
     last_timed_steps = 0
     steps = 0
-    use_reward_clipping = False
+
     if param_sweeper_dict.get("record_visited_observations", False) is True:
         visited_observations = []
     else:
         visited_observations = None
 
+    # reward clipping initialization
+    use_reward_clipping = False
     for preprocessor in param_sweeper_dict["preprocessors"]:
         if isinstance(preprocessor, RewardClipping):
             use_reward_clipping = True
             break
-    if use_reward_clipping:
-        cum_clipped_reward = 0
-        last_cum_clipped_reward_print = cum_reward
-        last_cum_clipped_reward_record = cum_reward
-        avg_clipped_reward_list = []
+    cum_clipped_reward = 0 if use_reward_clipping else None
+    last_cum_clipped_reward_print = cum_reward if use_reward_clipping else None
+    last_cum_clipped_reward_record = cum_reward if use_reward_clipping else None
+    avg_clipped_reward_list = [] if use_reward_clipping else None
+    eval_average_clipped_reward_list = (
+        []
+        if use_reward_clipping and param_sweeper_dict["eval_in_continuing_env"]
+        else None
+    )
+    eval_episodic_clipped_return_list = (
+        []
+        if use_reward_clipping and param_sweeper_dict["eval_in_episodic_env"]
+        else None
+    )
+
     while steps < max_steps:
+        # agent takes an action
         action = agent.act(exploit=False)
         action = (
             action.cpu() if isinstance(action, torch.Tensor) else action
         )  # action can be int sometimes
+
+        # environment receives the action and returns the result
         action_result = env.step(action)
+
+        # update stats
         if "reward_offset" in param_sweeper_dict:
             action_result.reward += param_sweeper_dict["reward_offset"]
-        assert action_result.truncated is False
-
+        if "reset" in action_result.info:
+            cum_reset += action_result.info["reset"]
         cum_reward += action_result.reward
         for preprocessor in param_sweeper_dict["preprocessors"]:
             preprocessor.process(action_result)
         if use_reward_clipping:
             cum_clipped_reward += action_result.reward
-        if visited_observations is not None and steps % 1000 == 0:
+        if visited_observations is not None and steps % 1000 == 0 and steps <= 1000000:
             visited_observations.append(action_result.observation)
 
-        agent.observe(action_result)
         steps += 1
+
+        # print stats
         if steps % print_every_x_steps == 0:
+            actor_loss = (
+                np.mean(learning_report_cache["actor_loss"])
+                if "actor_loss" in learning_report_cache
+                else 0
+            )
+            critic_loss = (
+                np.mean(learning_report_cache["critic_loss"])
+                if "critic_loss" in learning_report_cache
+                else 0
+            )
+            # print(agent.policy_learner._actor._reset_model[0][0].weight[0][0], agent.policy_learner._actor._reset_model[0][0].bias)
+            message = f"steps {steps}, agent={agent}, env={env}, average_reward={(cum_reward - last_cum_reward_print) / print_every_x_steps}, average_reset={(cum_reset - last_cum_reset_print) / print_every_x_steps}, actor_loss = {actor_loss}, critic_loss = {critic_loss}"
             if use_reward_clipping:
-                logger.info(
-                    f"steps {steps}, agent={agent}, env={env}, average_reward={(cum_reward - last_cum_reward_print) / print_every_x_steps}, average_clipped_reward={(cum_clipped_reward - last_cum_clipped_reward_print) / print_every_x_steps}",
+                message = (
+                    message
+                    + f", average_clipped_reward={(cum_clipped_reward - last_cum_clipped_reward_print) / print_every_x_steps}"
                 )
                 last_cum_clipped_reward_print = cum_clipped_reward
-            else:
-                logger.info(
-                    f"steps {steps}, agent={agent}, env={env}, average_reward={(cum_reward - last_cum_reward_print) / print_every_x_steps}",
-                )
             last_cum_reward_print = cum_reward
+            last_cum_reset_print = cum_reset
             end_time = time.time()
             SPS = int((steps - last_timed_steps) / (end_time - start_time))
             logger.info(f"samples per second: {SPS}")
+            logger.info(message)
             start_time = end_time
             last_timed_steps = steps
+
+        # record stats
         if steps % record_period == 0:
             # record the average reward over the last record_period time steps
             avg_reward_list.append(
                 (cum_reward - last_cum_reward_record) / record_period
             )
+            # record the average reset over the last record_period time steps
             last_cum_reward_record = cum_reward
+            avg_reset_list.append((cum_reset - last_cum_reset_record) / record_period)
+            last_cum_reset_record = cum_reset
+
+            # record the average clipped reward over the last record_period time steps
             if use_reward_clipping:
+                assert avg_clipped_reward_list is not None
                 avg_clipped_reward_list.append(
                     (cum_clipped_reward - last_cum_clipped_reward_record)
                     / record_period
                 )
                 last_cum_clipped_reward_record = cum_clipped_reward
+
             # evaluate the learned policy in the episodic and continuing versions of the environment
-            eps_return, avg_reward, eps_clipped_return, avg_clipped_reward = (
-                offline_eval(
-                    eval_agent=eval_agent,
-                    envs=envs,
-                    eval_max_steps=eval_max_steps,
-                    preprocessors=param_sweeper_dict["preprocessors"],
-                    eval_in_episodic_env=param_sweeper_dict["eval_in_episodic_env"],
-                    eval_in_continuing_env=param_sweeper_dict["eval_in_continuing_env"],
-                )
+            (
+                eps_return,
+                avg_reward,
+                eps_clipped_return,
+                avg_clipped_reward,
+                avg_reset,
+            ) = offline_eval(
+                eval_agent=eval_agent,
+                envs=envs,
+                eval_max_steps=eval_max_steps,
+                preprocessors=param_sweeper_dict["preprocessors"],
+                eval_in_episodic_env=param_sweeper_dict["eval_in_episodic_env"],
+                eval_in_continuing_env=param_sweeper_dict["eval_in_continuing_env"],
             )
-            if eps_return is not None:
+            if eval_episodic_return_list is not None:
                 eval_episodic_return_list.append(eps_return)
-            if avg_reward is not None:
+            if eval_average_reward_list is not None:
                 eval_average_reward_list.append(avg_reward)
-            if eps_clipped_return is not None:
+            if eval_episodic_clipped_return_list is not None:
                 eval_episodic_clipped_return_list.append(eps_clipped_return)
-            if avg_clipped_reward is not None:
+            if eval_average_clipped_reward_list is not None:
                 eval_average_clipped_reward_list.append(avg_clipped_reward)
+            if eval_average_reset_list is not None:
+                eval_average_reset_list.append(avg_reset)
+
+            # record stats in learning report
             for key in learning_report_cache:
                 learning_report.setdefault(key, []).append(
                     np.mean(learning_report_cache[key])
                 )
 
+        # agent observes the new result of the action
+        agent.observe(action_result)
+
+        # agent learns
         assert learn_every_k_steps > 0, "learn_every_k_steps must be positive"
         if (
             steps >= param_sweeper_dict["learning_starts"]
@@ -773,33 +1025,44 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
             report = agent.learn()
             for key in report:
                 learning_report_cache.setdefault(key, []).append(report[key])
+
+    # save all the recorded stats
     output_dir = param_sweeper_dict["output_dir"]
     os.makedirs(output_dir, exist_ok=True)
     np.save(
         f"{output_dir}/{run_idx}_average_reward.npy",
         np.array(avg_reward_list),
     )
-    if use_reward_clipping:
+    np.save(
+        f"{output_dir}/{run_idx}_average_reset.npy",
+        np.array(avg_reset_list),
+    )
+    if avg_clipped_reward_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_average_clipped_reward.npy",
             np.array(avg_clipped_reward_list),
         )
-    if len(eval_episodic_return_list) > 0:
+    if eval_episodic_return_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_episodic_return.npy",
             np.array(eval_episodic_return_list),
         )
-    if len(eval_average_reward_list) > 0:
+    if eval_average_reward_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_average_reward.npy",
             np.array(eval_average_reward_list),
         )
-    if len(eval_episodic_clipped_return_list) > 0:
+    if eval_average_reset_list is not None:
+        np.save(
+            f"{output_dir}/{run_idx}_eval_average_reset.npy",
+            np.array(eval_average_reset_list),
+        )
+    if eval_episodic_clipped_return_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_episodic_clipped_return.npy",
             np.array(eval_episodic_clipped_return_list),
         )
-    if len(eval_average_clipped_reward_list) > 0:
+    if eval_average_clipped_reward_list is not None:
         np.save(
             f"{output_dir}/{run_idx}_eval_average_clipped_reward.npy",
             np.array(eval_average_clipped_reward_list),
@@ -809,7 +1072,7 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
             f"{output_dir}/{run_idx}_{key}.npy",
             np.array(learning_report[key]),
         )
-    if param_sweeper_dict.get("record_visited_observations", False) is True:
+    if visited_observations is not None:
         np.save(
             f"{output_dir}/{run_idx}_visited_observations.npy",
             np.array(visited_observations),
@@ -822,6 +1085,7 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
     ):
         if (
             hasattr(env.env, "data")
+            # pyre-fixme
             and hasattr(env.env.data, "qpos")
             and hasattr(env.env.data, "qvel")
         ):
@@ -833,7 +1097,12 @@ def run_steps(train_agent, eval_agent, envs, param_sweeper_dict) -> None:
     return
 
 
-def init_class(module_class, module_name, param_sweeper_dict) -> None:
+def init_class(
+    # pyre-fixme
+    module_class,
+    module_name: str,
+    param_sweeper_dict: Dict[str, Any],
+) -> None:
     filtered_dict = {}
     for key, value in param_sweeper_dict.items():
         prefix = module_name + ":"
@@ -847,7 +1116,7 @@ def init_class(module_class, module_name, param_sweeper_dict) -> None:
     param_sweeper_dict[module_name] = module_class(**filtered_dict)
 
 
-def ppo_init_network_continuous(param_sweeper_dict) -> None:
+def ppo_init_network_continuous(param_sweeper_dict: Dict[str, Any]) -> None:
     param_sweeper_dict["actor_network_instance"].apply(orthogonal_init_weights)
     param_sweeper_dict["critic_network_instance"].apply(orthogonal_init_weights)
     if hasattr(param_sweeper_dict["actor_network_instance"], "fc_mu"):
@@ -856,7 +1125,7 @@ def ppo_init_network_continuous(param_sweeper_dict) -> None:
         )
 
 
-def ppo_init_network_discrete(param_sweeper_dict) -> None:
+def ppo_init_network_discrete(param_sweeper_dict: Dict[str, Any]) -> None:
     param_sweeper_dict["actor_network_instance"].apply(orthogonal_init_weights)
     param_sweeper_dict["critic_network_instance"].apply(orthogonal_init_weights)
     if hasattr(param_sweeper_dict["actor_network_instance"], "_model_fc"):
@@ -864,6 +1133,16 @@ def ppo_init_network_discrete(param_sweeper_dict) -> None:
             0.01
             / 1.4142
             * param_sweeper_dict["actor_network_instance"]._model_fc[-1][0].weight.data
+        )
+    if hasattr(param_sweeper_dict["actor_network_instance"], "_reset_model_fc"):
+        param_sweeper_dict["actor_network_instance"]._reset_model_fc[-1][
+            0
+        ].weight.data.copy_(
+            0.01
+            / 1.4142
+            * param_sweeper_dict["actor_network_instance"]
+            ._reset_model_fc[-1][0]
+            .weight.data
         )
     if hasattr(param_sweeper_dict["critic_network_instance"], "_model_fc"):
         param_sweeper_dict["critic_network_instance"]._model_fc[-1][
@@ -875,17 +1154,17 @@ def ppo_init_network_discrete(param_sweeper_dict) -> None:
         )
 
 
-def sac_atari_init_network(param_sweeper_dict) -> None:
+def sac_atari_init_network(param_sweeper_dict: Dict[str, Any]) -> None:
     param_sweeper_dict["actor_network_instance"].apply(kaiming_normal_init_weights)
     param_sweeper_dict["critic_network_instance"].apply(kaiming_normal_init_weights)
 
 
-def ac_init_network(param_sweeper_dict) -> None:
+def ac_init_network(param_sweeper_dict: Dict[str, Any]) -> None:
     param_sweeper_dict["actor_network_instance"].apply(xavier_init_weights)
     param_sweeper_dict["critic_network_instance"].apply(xavier_init_weights)
 
 
-def q_init_network(param_sweeper_dict) -> None:
+def q_init_network(param_sweeper_dict: Dict[str, Any]) -> None:
     param_sweeper_dict["network_instance"].apply(xavier_init_weights)
 
 
@@ -899,15 +1178,16 @@ if __name__ == "__main__":
     parser.add_argument("--out-dir", default="/tmp/pearl")
     parser.add_argument("--eval-agent", action="store_true")
     parser.add_argument("--render", action="store_true")
-    args = parser.parse_args()
-    exp_name = args.config_file.split("/")[1]
-    project_root = os.path.abspath(os.path.dirname(__file__))
+    args: argparse.Namespace = parser.parse_args()
+    exp_name: str = args.config_file.split("/")[1]
+    project_root: str = os.path.abspath(os.path.dirname(__file__))
+    # pyre-fixme
     param_sweeper = Sweeper(os.path.join(project_root, args.config_file))
     envs_configs = ["env", "eval_env_episodic", "eval_env_continuing"]
-    agents = []
-    envs = []
-    run_id = int(args.base_id)
-    param_sweeper_dict = param_sweeper.parse(run_id)
+    agents: List[PearlAgent] = []
+    envs: List[Optional[GymEnvironment]] = []
+    run_id: int = int(os.environ["RANK"]) + int(args.base_id)
+    param_sweeper_dict: Dict[str, Any] = param_sweeper.parse(run_id)
     param_sweeper_dict["id"] = run_id
     param_sweeper_dict["device_id"] = args.gpu_id
     param_sweeper_dict["output_dir"] = args.out_dir
@@ -941,16 +1221,20 @@ if __name__ == "__main__":
             env = get_env(param_sweeper_dict[envs_configs[i]])
         else:
             env = get_env(param_sweeper_dict[envs_configs[i]])
+        assert isinstance(env.action_space, BoxActionSpace) or isinstance(
+            env.action_space, DiscreteActionSpace
+        )
         env.action_space._gym_space.seed(seed=run_id)
         env.reset(seed=run_id)
         envs.append(env)
 
-    env = envs[0]  # training environment
+    # pyre-fixme
+    env: GymEnvironment = envs[0]  # training environment
     param_sweeper_dict["action_space"] = env.action_space
     param_sweeper_dict["preprocessors"] = []
     if isinstance(env.action_space, DiscreteActionSpace):
-        max_number_actions = env.action_space.n
-        action_dim = env.action_space.action_dim
+        max_number_actions: int = env.action_space.n
+        action_dim: int = env.action_space.action_dim
     elif isinstance(env.action_space, BoxActionSpace):
         max_number_actions = -1
         action_dim = env.action_space.action_dim
@@ -961,7 +1245,7 @@ if __name__ == "__main__":
     Initialize preprocessors
     """
     param_sweeper_dict["preprocessors"] = []
-    training_env_name = param_sweeper_dict["env"][0]["env_name"]
+    training_env_name: str = param_sweeper_dict["env"][0]["env_name"]
     if "ALE/" in training_env_name or "NoFrameskip" in training_env_name:
         param_sweeper_dict["preprocessors"].append(RewardClipping())
 
@@ -970,6 +1254,7 @@ if __name__ == "__main__":
         and param_sweeper_dict["is_action_continuous"] is True
     ):
         param_sweeper_dict["preprocessors"].append(
+            # pyre-fixme
             ObservationNormalization(envs[0].observation_space.shape)
         )
 
@@ -993,7 +1278,7 @@ if __name__ == "__main__":
             )
         else:
             raise NotImplementedError
-        action_representation_module_class = getattr(
+        action_representation_module_class: Type[ActionRepresentationModule] = getattr(
             action_representation_modules,
             param_sweeper_dict["action_representation_module:type"],
         )
@@ -1010,7 +1295,7 @@ if __name__ == "__main__":
             )
         )
 
-    action_representation_dim = param_sweeper_dict[
+    action_representation_dim: int = param_sweeper_dict[
         "action_representation_module"
     ].representation_dim
 
@@ -1020,7 +1305,7 @@ if __name__ == "__main__":
 
     if "exploration_module:type" in param_sweeper_dict:
         # if exploration module name is specified, initialize an exploration module
-        exploration_module_class = getattr(
+        exploration_module_class: Type[ExplorationModule] = getattr(
             exploration_modules, param_sweeper_dict["exploration_module:type"]
         )
         if "exploration_module:std_dev" in param_sweeper_dict and isinstance(
@@ -1028,7 +1313,7 @@ if __name__ == "__main__":
         ):
             assert isinstance(env.action_space, BoxActionSpace)
             assert len(param_sweeper_dict["exploration_module:std_dev"]) == 2
-            tmp = (
+            tmp: torch.Tensor = (
                 torch.ones(
                     param_sweeper_dict[
                         "action_representation_module:representation_dim"
@@ -1041,7 +1326,7 @@ if __name__ == "__main__":
         init_class(exploration_module_class, "exploration_module", param_sweeper_dict)
         if "exploration_module_wrapper:type" in param_sweeper_dict:
             # if exploration wrapper module name is specified, initialize an exploration module
-            exploration_wrapper_class = getattr(
+            exploration_wrapper_class: Type[ExplorationModuleWrapper] = getattr(
                 exploration_wrappers,
                 param_sweeper_dict["exploration_module_wrapper:type"],
             )
@@ -1079,7 +1364,7 @@ if __name__ == "__main__":
 
     if "replay_buffer:type" in param_sweeper_dict:
         # if replay buffer is specified, intialize one
-        replay_buffer_class = getattr(
+        replay_buffer_class: Type[ReplayBuffer] = getattr(
             replay_buffers, param_sweeper_dict["replay_buffer:type"]
         )
         init_class(replay_buffer_class, "replay_buffer", param_sweeper_dict)
@@ -1105,6 +1390,7 @@ if __name__ == "__main__":
         elif param_sweeper_dict["network_instance:type"] in [
             "VanillaQValueNetwork",
             "VanillaQValueMultiHeadNetwork",
+            "VanillaAgentResetQValueNetwork",
         ]:
             # vector based inputs
             assert len(env.observation_space.shape) == 1
@@ -1114,7 +1400,7 @@ if __name__ == "__main__":
         else:
             raise NotImplementedError
         param_sweeper_dict["network_instance:action_dim"] = action_representation_dim
-        network_class = getattr(
+        network_class: Type[QValueNetwork] = getattr(
             q_value_networks, param_sweeper_dict["network_instance:type"]
         )
         init_class(network_class, "network_instance", param_sweeper_dict)
@@ -1134,6 +1420,10 @@ if __name__ == "__main__":
             "VanillaContinuousActorNetwork",
             "GaussianActorNetwork",
             "ClipGaussianActorNetwork",
+            "VanillaContinuousSeparateAgentResetActorNetwork",
+            "VanillaContinuousCombinedAgentResetActorNetwork",
+            "GaussianAgentResetActorNetwork",
+            "ClipGaussianAgentResetActorNetwork",
         ]:
             param_sweeper_dict["actor_network_instance:input_dim"] = (
                 env.observation_space.shape[0]
@@ -1146,7 +1436,7 @@ if __name__ == "__main__":
             else max_number_actions  # discrete actions
         )
         param_sweeper_dict["actor_network_instance:action_space"] = env.action_space
-        actor_class = getattr(
+        actor_class: Type[ActorNetwork] = getattr(
             actor_networks, param_sweeper_dict["actor_network_instance:type"]
         )
         init_class(actor_class, "actor_network_instance", param_sweeper_dict)
@@ -1156,7 +1446,7 @@ if __name__ == "__main__":
         if param_sweeper_dict["critic_network_instance:type"] in [
             "VanillaValueNetwork",
         ]:
-            critic_class = getattr(
+            critic_class: Type[ValueNetwork] = getattr(
                 value_networks, param_sweeper_dict["critic_network_instance:type"]
             )
             param_sweeper_dict["critic_network_instance:input_dim"] = (
@@ -1176,8 +1466,10 @@ if __name__ == "__main__":
         elif param_sweeper_dict["critic_network_instance:type"] in [
             "EnsembleQValueNetwork",
         ]:
-            list_of_member_networks = []
-            ensemble_size = param_sweeper_dict["critic_network_instance:ensemble_size"]
+            list_of_member_networks: List[QValueNetwork] = []
+            ensemble_size: int = param_sweeper_dict[
+                "critic_network_instance:ensemble_size"
+            ]
             for _ in range(ensemble_size):
                 if param_sweeper_dict["critic_member_network:type"] in [
                     "CNNQValueNetwork",
@@ -1190,6 +1482,7 @@ if __name__ == "__main__":
                     param_sweeper_dict["critic_member_network:input_channels_count"] = 4
                 elif param_sweeper_dict["critic_member_network:type"] in [
                     "VanillaQValueNetwork",
+                    "VanillaAgentResetQValueNetwork",
                     "VanillaQValueMultiHeadNetwork",
                 ]:
                     # vector based inputs
@@ -1216,10 +1509,11 @@ if __name__ == "__main__":
                     ):
                         filtered_dict[key[len(prefix) :]] = value
                 list_of_member_networks.append(member_network_class(**filtered_dict))
-            models = nn.ModuleList(list_of_member_networks)
-            critic_class = getattr(
+            models: nn.ModuleList = nn.ModuleList(list_of_member_networks)
+            critic_class: Type[QValueNetwork] = getattr(
                 q_value_networks, param_sweeper_dict["critic_network_instance:type"]
             )
+            # pyre-fixme
             param_sweeper_dict["critic_network_instance"] = critic_class(
                 models=models, ensemble_size=ensemble_size
             )
@@ -1272,7 +1566,9 @@ if __name__ == "__main__":
 
     if "optimizer:type" in param_sweeper_dict:
         assert "network_instance" in param_sweeper_dict
-        optimizer_class = getattr(torch.optim, param_sweeper_dict["optimizer:type"])
+        optimizer_class: Type[torch.optim.Optimizer] = getattr(
+            torch.optim, param_sweeper_dict["optimizer:type"]
+        )
         param_sweeper_dict["optimizer:params"] = param_sweeper_dict[
             "network_instance"
         ].parameters()
@@ -1280,7 +1576,7 @@ if __name__ == "__main__":
 
     if "actor_optimizer:type" in param_sweeper_dict:
         assert "actor_network_instance" in param_sweeper_dict
-        actor_optimizer_class = getattr(
+        actor_optimizer_class: Type[torch.optim.Optimizer] = getattr(
             torch.optim, param_sweeper_dict["actor_optimizer:type"]
         )
         param_sweeper_dict["actor_optimizer:params"] = param_sweeper_dict[
@@ -1290,7 +1586,7 @@ if __name__ == "__main__":
 
     if "critic_optimizer:type" in param_sweeper_dict:
         assert "critic_network_instance" in param_sweeper_dict
-        critic_optimizer_class = getattr(
+        critic_optimizer_class: Type[torch.optim.Optimizer] = getattr(
             torch.optim, param_sweeper_dict["critic_optimizer:type"]
         )
         param_sweeper_dict["critic_optimizer:params"] = param_sweeper_dict[
@@ -1300,7 +1596,7 @@ if __name__ == "__main__":
 
     if param_sweeper_dict.get("reward_centering:type", None) is not None:
         if param_sweeper_dict["reward_centering:type"] == "TD":
-            reward_rate_optimizer_class = getattr(
+            reward_rate_optimizer_class: Type[torch.optim.Optimizer] = getattr(
                 torch.optim, param_sweeper_dict["reward_rate_optimizer:type"]
             )
             param_sweeper_dict["reward_rate_optimizer:params"] = [
@@ -1321,13 +1617,19 @@ if __name__ == "__main__":
     Initialize a policy learner
     """
 
-    policy_learner_class = getattr(
-        policy_learners, param_sweeper_dict["policy_learner:type"]
-    )
+    policy_learner_class: (
+        Type[ProximalPolicyOptimization]
+        | Type[DeepQLearning]
+        | Type[SoftActorCritic]
+        | Type[ContinuousSoftActorCritic]
+        | Type[TD3]
+        | Type[DeepDeterministicPolicyGradient]
+    ) = getattr(policy_learners, param_sweeper_dict["policy_learner:type"])
 
-    filtered_dict = {
+    filtered_dict: Dict[str, Any] = {
         key: value
         for key, value in param_sweeper_dict.items()
+        # pyre-fixme
         if key in policy_learner_class.__init__.__code__.co_varnames
     }
     param_sweeper_dict["policy_learner"] = policy_learner_class(**filtered_dict)
@@ -1339,6 +1641,7 @@ if __name__ == "__main__":
     filtered_dict = {
         key: value
         for key, value in param_sweeper_dict.items()
+        # pyre-fixme
         if key in PearlAgent.__init__.__code__.co_varnames
     }
     train_agent = PearlAgent(**filtered_dict)
@@ -1352,7 +1655,9 @@ if __name__ == "__main__":
         assert (
             "model_folder" in param_sweeper_dict
         ), "model_folder not found in param_sweeper_dict"
-        model_path = args.out_dir + param_sweeper_dict["model_folder"] + str(run_id)
+        model_path: str = (
+            args.out_dir + param_sweeper_dict["model_folder"] + str(run_id)
+        )
         try:
             train_agent.policy_learner.load_model(path=model_path)
 
@@ -1374,23 +1679,32 @@ if __name__ == "__main__":
             train_agent.policy_learner.exploration_module, EGreedyExploration
         ):
             train_agent.policy_learner.exploration_module.warmup_steps = None
+            # pyre-fixme
             train_agent.policy_learner.exploration_module.curr_epsilon = (
                 train_agent.policy_learner.exploration_module.end_epsilon
             )
-        evaluate(
+        # train_agent.policy_learner.load_model(path="experiments/episodic_exps_better_algo/outputs/3")
+        # qpos = np.load(param_sweeper_dict["model_folder"] + str(run_id) + "_qpos.npy")
+        # qvel = np.load(param_sweeper_dict["model_folder"] + str(run_id) + "_qvel.npy")
+        eval_agent(
             agent=train_agent,
-            env=envs[2] if envs[2] is not None else envs[0],
+            # pyre-fixme
+            envs=envs,
             render=args.render,
             output_dir=args.out_dir,
             video_dir=args.out_dir + param_sweeper_dict["video_folder"],
             name=training_env_name + "_" + param_sweeper_dict["policy_learner:type"],
             max_steps=param_sweeper_dict["eval_max_steps"],
+            max_episodes=10,
             run_idx=run_id,
             preprocessors=param_sweeper_dict["preprocessors"],
+            eval_in_episodic_env=param_sweeper_dict["eval_in_episodic_env"],
+            eval_in_continuing_env=param_sweeper_dict["eval_in_continuing_env"],
         )
     else:
-        eval_agent = copy.deepcopy(train_agent)
+        eval_agent: PearlAgent = copy.deepcopy(train_agent)
         eval_agent.policy_learner = train_agent.policy_learner
+        # pyre-fixme
         eval_agent.replay_buffer = train_agent.replay_buffer.__class__(capacity=0)
 
         if param_sweeper_dict["env"][0]["is_continuing"] or param_sweeper_dict.get(

@@ -1,0 +1,531 @@
+{
+	"plots_dir": ["experiments/refactor/predefined_resets_mujoco_new/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [10]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [100]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [1000]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [10]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["ant_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [100]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["ant_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [1000]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["ant_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [10]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["humanoid_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [100]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["humanoid_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [1000]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["humanoid_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [10]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [100]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [1000]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [10]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [100]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"reset_cost": [1000]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"curve_labels": [[ "continuing", "episodic w/ reset cost", "episodic"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

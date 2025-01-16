@@ -1,0 +1,87 @@
+{
+    "print_every_x_steps": [10000],
+    "record_period": [10000],
+    "max_steps": [3000000],
+    "eval_max_steps": [10000],
+    "eval_in_episodic_env": [false],
+    "eval_in_continuing_env": [false],
+    "save_model": [true],
+    "model_folder": ["models/"],
+    "video_folder": ["videos/"],
+    "record_visited_observations": [true],
+    "reward_centering": [
+        {
+            "reward_centering:type":[null],
+            "discount_factor": [0.99]
+        }
+    ],
+    "algos": [
+        {
+            "policy_learner:type": ["DeepDeterministicPolicyGradient"],
+            "actor_network_instance:type": ["VanillaContinuousSeparateAgentResetActorNetwork", "VanillaContinuousCombinedAgentResetActorNetwork"],
+            "critic_network_instance:type": ["EnsembleQValueNetwork"],
+            "critic_member_network:type": ["VanillaQValueNetwork"],
+            "actor_network_instance:hidden_dims": [[256, 256]],
+            "critic_member_network:hidden_dims": [[256, 256]],
+            "critic_network_instance:ensemble_size": [1],
+            "actor_optimizer:type": ["Adam"],
+            "critic_optimizer:type": ["Adam"],
+            "actor_optimizer:lr": [3e-4],
+            "critic_optimizer:lr": [3e-4],
+            "training_rounds": [1],
+            "batch_size": [256],
+            "actor_soft_update_tau": [0.005],
+            "critic_soft_update_tau": [0.005],
+            "action_representation_module:type": ["IdentityActionRepresentationModule"],
+            "exploration_module:type": ["NormalDistributionExploration"],
+            "exploration_module:mean": [0],
+            "exploration_module:std_dev": [[0.1, 0.005], [0.1, 0.0005], [0.1, 0.00005], [0.1, 0.0]],
+            "exploration_module_wrapper:type": ["Warmup"],
+            "exploration_module_wrapper:has_agent_reset": [true],
+            "exploration_module_wrapper:warmup_steps": [25000],
+            "exploration_module_wrapper:agent_reset_warmup_setting": ["predefined", "1/50", "1/500", "100 random", "1000 random"],
+            "replay_buffer:type": ["OffPolicyReplayBuffer"],
+            "replay_buffer:capacity": [1000000],
+            "learn_every_k_steps": [1],
+            "learning_starts": [25000],
+            "reg": [
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.1],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.01],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.001],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [1.0]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.1]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.01]
+                }
+            ]
+        }
+    ],
+
+    "envs_name": [
+        {
+            "env": [
+                [{"env_name": "Humanoid-no-timeout-v4", "agent_reset_cost_wrapper": true, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]
+            ]
+        }
+    ]
+}

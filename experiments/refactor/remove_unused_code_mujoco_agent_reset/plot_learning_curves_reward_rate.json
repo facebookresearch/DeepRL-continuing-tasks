@@ -1,0 +1,378 @@
+{
+	"plots_dir": ["experiments/refactor/sanity_check_mujoco/"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/sanity_check_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/sanity_check_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":[null]
+				},
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"],
+					"reward_rate_optimizer:lr": [3e-3]
+				},
+				{
+					"reward_centering:type":["MA"],
+					"reward_centering:ma_rate": [0.999]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ppo"],
+			"num_runs": [5],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/continuing_continuous/current_methods_problem_reset_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/current_methods_problem_reset_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/reward_centering_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/reward_centering_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"reward_rate_optimizer:lr": [3e-3],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/ma_reward_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/ma_reward_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99],
+					"ma_rate": [0.999]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/RVI_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/RVI_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ppo_old"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [0.333]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/sanity_check_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/sanity_check_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":[null]
+				},
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"],
+					"reward_rate_optimizer:lr": [3e-3]
+				},
+				{
+					"reward_centering:type":["MA"],
+					"reward_centering:ma_rate": [0.999]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ddpg"],
+			"num_runs": [5],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/continuing_continuous/current_methods_problem_reset_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/current_methods_problem_reset_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/reward_centering_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/reward_centering_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"reward_rate_optimizer:lr": [3e-3],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/ma_reward_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/ma_reward_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99],
+					"ma_rate": [0.999]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/RVI_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/RVI_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_ddpg_old"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [0.333]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/sanity_check_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/sanity_check_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":[null]
+				},
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"],
+					"reward_rate_optimizer:lr": [3e-3]
+				},
+				{
+					"reward_centering:type":["MA"],
+					"reward_centering:ma_rate": [0.999]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_td3"],
+			"num_runs": [5],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/continuing_continuous/current_methods_problem_reset_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/current_methods_problem_reset_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/reward_centering_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/reward_centering_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"reward_rate_optimizer:lr": [3e-3],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/ma_reward_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/ma_reward_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99],
+					"ma_rate": [0.999]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/RVI_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/RVI_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_td3_old"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [0.333]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/sanity_check_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/sanity_check_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"]
+				}
+			],
+			"reward_centering": [
+				{
+					"reward_centering:type":[null]
+				},
+				{
+					"reward_centering:type":["TD"],
+					"reward_centering:initialize_reward_rate": [true],
+					"reward_rate_optimizer:type": ["SGD"],
+					"reward_rate_optimizer:lr": [3e-3]
+				},
+				{
+					"reward_centering:type":["MA"],
+					"reward_centering:ma_rate": [0.999]
+				},
+				{
+					"reward_centering:type":["RVI"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_csac"],
+			"num_runs": [5],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/continuing_continuous/current_methods_problem_reset_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/current_methods_problem_reset_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/reward_centering_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/reward_centering_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"reward_rate_optimizer:lr": [3e-3],
+					"discount_factor": [0.99]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/ma_reward_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/ma_reward_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99],
+					"ma_rate": [0.999]
+				},
+				{
+					"exp_input_file": ["experiments/continuing_continuous/RVI_3M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/RVI_3M/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["reward_rate_estimate"],
+					"linestyle": ["solid"],
+					"discount_factor": [0.99]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid_csac_old"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"curve_labels": [["No RC", "TD", "MA", "RVI"]],
+			"title": ["PPO"],
+
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [0.333]
+		}
+	]
+}

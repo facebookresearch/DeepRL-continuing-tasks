@@ -1,0 +1,1002 @@
+{
+	"plots_dir": ["experiments/refactor/predefined_resets_mujoco_new/all_curves"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_td3_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_td3_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_ppo_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_ppo_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_ppo_10"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_ppo_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_100"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_1000"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["ant_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["humanoid_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_csac"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ContinuousSoftActorCritic"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["ant_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["humanoid_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["hopper_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-10],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-100],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"],
+					"reset_cost": [-1000],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 1000, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reset"],
+					"criterion": ["last10_min"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reward"],
+					"criterion": ["last10_max"],
+					"do_not_draw_curves": [true]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco_new/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco_new/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 0, "is_continuing": false, "terminate_when_unhealthy": true}]],
+					"suffix": ["eval_average_reset"],
+					"criterion": ["last10_min"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["walker2d_ppo"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["ProximalPolicyOptimization"],
+
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

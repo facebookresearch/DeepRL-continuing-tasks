@@ -1,0 +1,163 @@
+{
+	"plots_dir": ["experiments/refactor/predefined_resets_mujoco/paper"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "HalfCheetahNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true}]],
+					"suffix": ["average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_halfcheetahnew"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+			"ymin": [0],
+			"ymax": [15],
+			"title": ["HalfCheetahNew"],
+			"linestyle": [["solid", "dashed", "solid", "dashed", "solid", "dashed", "solid", "dashed"]],
+			"curve_colors": [["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]],
+			"curve_labels": [[ "DDPG", null, "TD3", null, "SAC", null, "PPO", null]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "AntNew-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_antnew"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+			"ymin": [-1],
+			"ymax": [8],
+			"title": ["AntNew"],
+			"linestyle": [["solid", "dashed", "solid", "dashed", "solid", "dashed", "solid", "dashed"]],
+			"curve_colors": [["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Hopper-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_hopper"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+
+			"title": ["Hopper"],
+			"linestyle": [["solid", "dashed", "solid", "dashed", "solid", "dashed", "solid", "dashed"]],
+			"curve_colors": [["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]],
+			"ymin": [0],
+			"ymax": [5],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Humanoid-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoid"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+			"linestyle": [["solid", "dashed", "solid", "dashed", "solid", "dashed", "solid", "dashed"]],
+			"curve_colors": [["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]],
+			"title": ["Humanoid"],
+			"ymin": [0],
+			"ymax": [9],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 10, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				},
+				{
+					"exp_input_file": ["experiments/refactor/predefined_resets_mujoco/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/predefined_resets_mujoco/"],
+					"env": [[{"env_name": "Walker2d-no-timeout-v4", "reset_cost_wrapper": true, "random_reset_prob": 0, "reset_cost": 100, "is_continuing": true, "terminate_when_unhealthy": true}]],
+					"suffix": ["average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_walker2d"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient", "TD3", "ContinuousSoftActorCritic", "ProximalPolicyOptimization"],
+
+			"ymin": [-1],
+			"ymax": [7],
+			"title": ["Walker2d"],
+			"linestyle": [["solid", "dashed", "solid", "dashed", "solid", "dashed", "solid", "dashed"]],
+			"curve_colors": [["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

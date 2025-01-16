@@ -1,0 +1,31 @@
+{
+	"plots_dir": ["experiments/refactor/no_resets_mujoco/paper_6M"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/continuing_continuous/current_methods_random_reset_no_cost_6M/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/continuing_continuous/current_methods_random_reset_no_cost_6M/"],
+					"eval_env_continuing": [[{"env_name": "ReacherNew-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["eval_average_reward"]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_reacher"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"linestyle": [["solid"]],
+			"curve_colors": [["#1f77b4"]],
+			"title": ["Swimmer"],
+			"ymin": [-1],
+			"ymax": [0],
+			"criterion": ["last50_max"],
+			"top_k": [1],
+			"curve_labels": [["DDPG"]],
+			"plot_percentage": [1.0]
+		}
+	]
+}

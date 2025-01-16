@@ -1,0 +1,69 @@
+{
+	"plots_dir": ["experiments/refactor/no_resets_mujoco/all_curves"],
+	"plots":
+	[
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "Reacher-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["DeepDeterministicPolicyGradient"],
+			"title": ["HumanoidStandup"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+			"title": ["HumanoidStandup"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"in_out_files": [
+				{
+					"exp_input_file": ["experiments/refactor/no_resets_mujoco_higher_exp_noise/inputs.json"],
+					"exp_output_dir": ["/home/yiwan/mydata/out/refactor/no_resets_mujoco_higher_exp_noise/"],
+					"env": [[{"env_name": "HumanoidStandup-no-timeout-v4", "is_continuing": true}]],
+					"suffix": ["average_reward"],
+					"draw_all_curves_only": [true]
+				}
+			],
+			"type": ["learning_curve"],
+			"name": ["learning_curves_humanoidstandup"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"policy_learner:type": ["TD3"],
+			"title": ["HumanoidStandup"],
+			"criterion": ["all_max"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

@@ -1,0 +1,99 @@
+{
+	"plots_dir": ["experiments/refactor/agent_resets_mujoco_new_actor/plot"],
+	"plots":
+	[
+		{
+			"exp_input_file": ["experiments/refactor/agent_resets_mujoco_new_actor/inputs.json"],
+			"exp_output_dir": ["/home/yiwan/mydata/out/refactor/agent_resets_mujoco_new_actor/"],
+			"suffix": ["average_reward"],
+			"actor_network_instance:type": ["VanillaContinuousSeparateAgentResetActorNetwork", "VanillaContinuousCombinedAgentResetActorNetwork"],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_actor_network"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"criterion": ["last10_max"],
+			"curve_labels": [["VanillaContinuousSeparateAgentResetActorNetwork", "VanillaContinuousCombinedAgentResetActorNetwork"]],
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"exp_input_file": ["experiments/refactor/agent_resets_mujoco_new_actor/inputs.json"],
+			"exp_output_dir": ["/home/yiwan/mydata/out/refactor/agent_resets_mujoco_new_actor/"],
+			"suffix": ["average_reward"],
+			"exploration_module:std_dev": [[0.1, 0.005], [0.1, 0.0005], [0.1, 0.00005], [0.1, 0.0]],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_std_dev"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"criterion": ["last10_max"],
+			"curve_labels": [["0.005", "0.0005", "0.00005", "0.0"]],
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"exp_input_file": ["experiments/refactor/agent_resets_mujoco_new_actor/inputs.json"],
+			"exp_output_dir": ["/home/yiwan/mydata/out/refactor/agent_resets_mujoco_new_actor/"],
+			"suffix": ["average_reward"],
+			"exploration_module_wrapper:agent_reset_warmup_setting": ["predefined", "1/50", "1/500", "100 random", "1000 random"],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_warmup"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"criterion": ["last10_max"],
+			"curve_labels": [["predefined", "1/50", "1/500", "100 random", "1000 random"]],
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		},
+		{
+			"exp_input_file": ["experiments/refactor/agent_resets_mujoco_new_actor/inputs.json"],
+			"exp_output_dir": ["/home/yiwan/mydata/out/refactor/agent_resets_mujoco_new_actor/"],
+			"suffix": ["average_reward"],
+			"reg": [
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.1],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.01],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.001],
+                    "entropy_coeff": [0.0]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [1.0]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.1]
+                },
+                {
+                    "l2_norm_coeff": [0.0],
+                    "entropy_coeff": [0.01]
+                }
+            ],
+			"type": ["learning_curve"],
+			"name": ["halfcheetah_ddpg_l2_ent"],
+			"num_runs": [10],
+			"x-label": ["x 10000 steps"],
+			"label_loc": ["lower right"],
+			"criterion": ["last10_max"],
+			"curve_labels": [["none", "0.1 l2", "0.01 l2", "0.001 l2", "1 ent", "0.1 ent", "0.01 ent"]],
+			"title": ["HalfCheetahNew"],
+			"top_k": [1],
+			"plot_percentage": [1.0]
+		}
+	]
+}

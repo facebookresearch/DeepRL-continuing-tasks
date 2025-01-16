@@ -1,12 +1,9 @@
-#!/usr/bin/env bash
-
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-#
-# This source code is licensed under the MIT license found in the
-# LICENSE file in the root directory of this source tree.
-#
-
+#!/usr/bin/bash
+# SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# cd $SCRIPT_DIR &&
+if [ "$LOCAL_RANK" = "0" ] && [ -z "$DISABLE_MOUNT" ]; then
+    source /packages/torchx_conda_mount/mount.sh
+fi
 export PYTHONPATH=.
 export MUJOCO_GL=disable
 python3 "$@"
